@@ -13,11 +13,66 @@
 // THEN this is added to the section of the README entitled Questions, with instructions on how to reach me with additional questions
 // WHEN I click on the links in the Table of Contents
 // THEN I am taken to the corresponding section of the README
+
+
 // TODO: Include packages needed for this application
 const inquirer = require("inquirer")
 const fs = require("fs")
+const generateMarkdown = require("./utils/generateMarkdown")
 // TODO: Create an array of questions for user input
-const questions = [];
+inquirer
+
+    .prompt([
+    {
+        type: "input",
+        name: "Title",
+        message: "Enter Project title"
+    },
+    {
+        type: "input",
+        name: "Description",
+        message: "Enter project description"
+    },
+    {
+        type: "list",
+        name: "Table of Contents",
+        message: "Select table of contents headers",
+        choices: ["Description", "Installation", "Usage", "Contributing", "Tests"]
+    },
+    {
+        type: "input",
+        name: "Installation",
+        message: "Enter how users can install your project"
+    },
+    {
+        type: "input",
+        name: "Usage",
+        message: "describe how users can use your application"
+    },
+    {
+        type: "input",
+        name: "Contributing",
+        message: "Describe the contribution guidelines for your application"
+    },
+    {
+        type: "input",
+        name: "Tests",
+        message: "Instruct user how to test your application"
+    },
+    {
+        type: "list",
+        name: "license",
+        message: "Choose a license",
+        choices: ["Apache License 2.0", "GNU General Public License v3.0", "MIT license", "Boost Software License 1.0", "Eclipse Public License 2.0"]
+    }
+
+])
+
+    .then ((response) => {
+    console.log(response)
+    const markdown = generateMarkdown(response)
+    fs.writeFile("./dist/README.md", markdown, (err) => err ? console.log("You missed some fields, please start over") : console.log("README created"))
+})
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {}

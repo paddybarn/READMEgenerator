@@ -34,12 +34,6 @@ inquirer
         message: "Enter project description"
     },
     {
-        type: "list",
-        name: "Table of Contents",
-        message: "Select table of contents headers",
-        choices: ["Description", "Installation", "Usage", "Contributing", "Tests"]
-    },
-    {
         type: "input",
         name: "Installation",
         message: "Enter how users can install your project"
@@ -61,9 +55,19 @@ inquirer
     },
     {
         type: "list",
-        name: "license",
+        name: "License",
         message: "Choose a license",
         choices: ["Apache License 2.0", "GNU General Public License v3.0", "MIT license", "Boost Software License 1.0", "Eclipse Public License 2.0"]
+    },
+    {
+        type: "input",
+        name: "Github",
+        message: "Enter Github username"
+    },
+    {
+        type: "input",
+        name: "Email",
+        message: "Enter email address"
     }
 
 ])
@@ -74,11 +78,11 @@ inquirer
     fs.writeFile("./dist/README.md", markdown, (err) => err ? console.log("You missed some fields, please start over") : console.log("README created"))
 })
 
-// TODO: Create a function to write README file
-function writeToFile(fileName, data) {}
+// // TODO: Create a function to write README file
+// function writeToFile(fileName, data) {}
 
-// TODO: Create a function to initialize app
-function init() {}
+// // TODO: Create a function to initialize app
+// function init() {}
 
-// Function call to initialize app
-init();
+// // Function call to initialize app
+// init();

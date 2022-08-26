@@ -19,6 +19,7 @@
 const inquirer = require("inquirer")
 const fs = require("fs")
 const generateMarkdown = require("./utils/generateMarkdown")
+const generateLICENSE = require("./utils/generateLICENSE")
 // TODO: Create an array of questions for user input
 inquirer
 
@@ -51,7 +52,7 @@ inquirer
     {
         type: "input",
         name: "Tests",
-        message: "Instruct user how to test your application"
+        message: "Describe tests used for your application"
     },
     {
         type: "list",
@@ -75,7 +76,9 @@ inquirer
     .then ((response) => {
     console.log(response)
     const markdown = generateMarkdown(response)
+    const License = generateLICENSE(response)
     fs.writeFile("./dist/README.md", markdown, (err) => err ? console.log("You missed some fields, please start over") : console.log("README created"))
+    fs.writeFile("./dist/LICENSE", License, (err) => err ? console.log("You missed some fields, please start over") : console.log("LICENSE created"))
 })
 
 // // TODO: Create a function to write README file
